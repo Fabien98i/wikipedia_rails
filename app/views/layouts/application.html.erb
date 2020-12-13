@@ -11,5 +11,13 @@
 
   <body>
     <%= yield %>
+    <header>
+     <h1> Bonjour 
+      <% if @current_user %>
+           <%= @current_user.name%>
+           <%= @current_user.username%> </h1>
+           <%= link_to  "Sign out", '/sign_out', method: :delete %>
+      <% end %>
+    </header>
   </body>
 </html>
