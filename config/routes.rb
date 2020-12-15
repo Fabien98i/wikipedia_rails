@@ -7,5 +7,9 @@ Rails.application.routes.draw do
   post '/sign_in', to: 'session#sign_in'
   delete '/sign_out', to: 'session#sign_out'
   
-
+  #articles$
+  # get '/articles', to: 'articles#index'
+  # get 'arctiles/new', to: 'articles#new'
+  # post '/articles', to: 'articles#create'
+  # get 
 end
