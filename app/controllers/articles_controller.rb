@@ -30,9 +30,6 @@ class ArticlesController < ApplicationController
     @article.user = @current_user
     respond_to do |format|
       if @article.save
-        content = Content.new
-        @content.article = @article
-        @content.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
@@ -45,15 +42,22 @@ class ArticlesController < ApplicationController
   # PATCH/PUT /articles/1
   # PATCH/PUT /articles/1.json
   def update
-    respond_to do |format|
-      if @article.update(article_params)
-        format.html { redirect_to @article, notice: 'Article was successfully updated.' }
-        format.json { render :show, status: :ok, location: @article }
-      else
-        format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+    # respond_to do |format|
+    if @article.update(article_params)
+        @content = Content.new
+        @content.article_id = @article.id
+        @content.content = @article.content
+        logger.info "Coucou" 
+        logger.info  @content.article_id.to_s
+        logger.info  @content.content.to_s
+        @content.save
+        # format.html { redirect_to @article, notice: 'Article was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @article }
+      # else
+      #   format.html { render :edit }
+      #   format.json { render json: @article.errors, status: :unprocessable_entity }
       end
-    end
+    # end
   end
 
   # DELETE /articles/1
@@ -87,7 +91,7 @@ class ArticlesController < ApplicationController
     
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title)
+      params.require(:article).permit(:title, :content)
     end
     
 end

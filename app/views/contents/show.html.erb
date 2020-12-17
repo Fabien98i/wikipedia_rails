@@ -1,9 +1,24 @@
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
+  <h1> All modifications about this Article  </h1>
 
-<p>
-  <strong>Content:</strong>
-  <%= @content.content %>
-</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Contents</th>
+        <th>Updated_at</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @content.each do |content| %>
+        <tr>
+          <td><%= content.content %></td>
+          <td><%= content.created_at%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 <%= link_to 'Edit the content', edit_content_path(@content) %> |
 <%= link_to 'Back', contents_path %>

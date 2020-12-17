@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   post '/sign_in', to: 'session#sign_in'
   delete '/sign_out', to: 'session#sign_out'
   
+  get '/contents/:id', to: 'contents#show', as: 'content_show'
   #articles$
   # get '/articles', to: 'articles#index'
   # get 'arctiles/new', to: 'articles#new'

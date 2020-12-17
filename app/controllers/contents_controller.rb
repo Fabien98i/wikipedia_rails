@@ -1,15 +1,30 @@
 class ContentsController < ApplicationController
   before_action :set_content, only: [:show, :edit, :update, :destroy]
-
   # GET /contents
   # GET /contents.json
   def index
+
     @contents = Content.all
+    #logger.info "contents ::::: "+ params[:id].to_s
+    #logger.info articles.title.to_s
+    # if @articles.id == @contents.article_id
+    #   @contents = Content.all
+    #   redirect_to index_path
+    #   else
+    #     redirect_to new_path, notice: 'Contenu indisponible'
+    # end
   end
 
   # GET /contents/1
   # GET /contents/1.json
   def show
+    # @articles = Article.all
+    # if @articles.id == @contents.article_id
+    #   redirect_to index_path
+    #   else
+    #     redirect_to new_path, notice: 'Contenu indisponible'
+    # end
+
   end
 
   # GET /contents/new
@@ -63,11 +78,25 @@ class ContentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_content
-      @content = Content.find(params[:id])
+      # @article_id = params[:id]
+      # @contents = Content.all
+      # logger.info "ID article dans article: " + @article_id.to_s
+      # logger.info "ID article dans article: " + @contents.to_s
+      #  for content in @content
+      #   logger.info "ID ARTICLE dans contenu" + content.id_article.to_s
+        
+      #   if content.id_article == @article_id
+          @content = Content.where(article_id: params[:id])
+      #   end
+      # end
     end
 
     # Only allow a list of trusted parameters through.
     def content_params
-      params.require(:content).permit(:content)
+      params.require(:content).permit(:content, :article_id)
+    end
+
+    def take_id_article
+      
     end
 end
